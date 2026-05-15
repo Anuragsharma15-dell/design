@@ -12,9 +12,15 @@ export const createDesign = async (req, res) => {
 
         //calling the llm model for the actual design ;
 
-        const desing  = generatedesign();
+        const design  = generatedesign();
 
         
+        if(!design){
+            return res.status(401).json({
+                message:"design not found "
+
+            })
+        }
 
         const newDesign = await Design.createDesign
         const savedDesign = await newDesign.save({
